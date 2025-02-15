@@ -17,7 +17,7 @@ function Dashboard({ token, setToken }) {
   useEffect(() => {
     if (token) {
       axios
-        .get("http://localhost:5000/getData", {
+        .get(`${import.meta.env.VITE_API_URL}/getData`, {
           headers: { Authorization: token },
         })
         .then((res) => setData(res.data))
@@ -29,10 +29,14 @@ function Dashboard({ token, setToken }) {
   }, [token]);
 
   const handleAddData = async () => {
-    await axios.post("http://localhost:5000/addData", { token, name, phone });
+    await axios.post(`${import.meta.env.VITE_API_URL}/addData`, {
+      token,
+      name,
+      phone,
+    });
     setName("");
     setPhone("");
-    const res = await axios.get("http://localhost:5000/getData", {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/getData`, {
       headers: { Authorization: token },
     });
     setData(res.data);

@@ -7,7 +7,10 @@ function Register({ setToken }) {
   const [password, setPassword] = useState("");
 
   const handleRegister = async () => {
-    await axios.post("http://localhost:5000/register", { username, password });
+    await axios.post(`${import.meta.env.VITE_API_URL}/register`, {
+      username,
+      password,
+    });
     alert("Registered successfully!");
   };
 
