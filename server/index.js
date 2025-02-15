@@ -10,7 +10,9 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect("mongodb://localhost:27017/userApp")
+  .connect(
+    "mongodb+srv://admin:admin1234@cluster0.7cv72pt.mongodb.net/userApp?retryWrites=true&w=majority&appName=Cluster0"
+  )
   .then(() => console.log("database connected successfully"))
   .catch((err) => console.log(err));
 
@@ -67,6 +69,10 @@ app.get("/getData", async (req, res) => {
   } catch (error) {
     res.status(401).json({ message: "Unauthorized" });
   }
+});
+
+app.get("/", (req, res) => {
+  res.json({ message: "server running successfully" });
 });
 
 app.listen(5000, () => console.log("Server running on port 5000"));
